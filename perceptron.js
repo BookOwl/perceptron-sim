@@ -7,11 +7,10 @@ clear_ctx = ctx => {
     ctx.restore();
 }
 
-
 const NUMBER_OF_POINTS = 800;
 
 // The line the perceptron is learning to recognize
-line = x => 0.6 * x - 20;
+line = x => 0.6 * x - 50;
 
 class Perceptron {
     constructor(num_weights) {
@@ -74,25 +73,34 @@ function run_sim() {
     let count = 0;
 
     function frame() {
+        // Get training mode
+        let MODE = document.getElementById("training_mode").checked ? 'fast' : 'slow';
+        // Set up the canvases
         clear_ctx(t_ctx);
         clear_ctx(p_ctx);
         t_ctx.lineWidth = 4;
+        t_ctx.fillStyle = 'rgb(0, 0, 0)';
         let left_y = line(MIN_X);
         let right_y = line(MAX_X);
+
+        // Draw the real line
         t_ctx.beginPath()
         t_ctx.moveTo(MIN_X, left_y);
         t_ctx.lineTo(MAX_X, right_y);
         t_ctx.stroke();
 
+        // Train the perceptron
+        if (MODE === 'fast') {
+            for (p of training_points) {
+                perceptron.train(p.inputs, p.answer);
+            }
+        } else {
+            let point = training_points[count];
+            perceptron.train(point.inputs, point.answer);
+            count = (count + 1) % training_points.length;
+        }
         
-        let point = training_points[count];
-        perceptron.train(point.inputs, point.answer);
-        count = (count + 1) % training_points.length
-        
-       /*
-        for (let p of training_points) {
-            perceptron.train(p.inputs, p.answer);
-        }*/
+        // Draw the training points
         t_ctx.lineWidth = 1;
         for (let p of training_points) {
             t_ctx.beginPath()
@@ -103,6 +111,18 @@ function run_sim() {
                 t_ctx.fill();
             }
         }
+
+        // Draw what the perceptron thinks the line is.
+        t_ctx.fillStyle = 'rgb(127, 127, 127)';
+        let weights = perceptron.weights;
+        let x1 = MIN_X;
+        let y1 = (-weights[2] - weights[0]*x1)/weights[1];
+        let x2 = MAX_X;
+        let y2 = (-weights[2] - weights[0]*x2)/weights[1];
+        t_ctx.beginPath()
+        t_ctx.moveTo(x1, y1);
+        t_ctx.lineTo(x2, y2);
+        t_ctx.stroke();
 
         // Draw the Perceptron
         p_ctx.beginPath()
