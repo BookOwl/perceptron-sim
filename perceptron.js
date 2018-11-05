@@ -7,8 +7,6 @@ clear_ctx = ctx => {
     ctx.restore();
 }
 
-const NUMBER_OF_POINTS = 800;
-
 // The line the perceptron is learning to recognize
 line = x => 0.6 * x - 50;
 
@@ -55,6 +53,8 @@ function run_sim() {
     const MAX_X =  (WIDTH  / 2);
     const MAX_Y =  (HEIGHT / 2);
 
+    t_ctx.setTransform(1, 0, 0, 1, 0, 0);
+    p_ctx.setTransform(1, 0, 0, 1, 0, 0);
     t_ctx.translate(WIDTH/2, HEIGHT/2);
     p_ctx.translate(WIDTH/2, HEIGHT/2);
     t_ctx.scale(1, -1);
@@ -63,6 +63,7 @@ function run_sim() {
     p_ctx.fillStyle = 'rgb(0, 0, 0)';
 
     let perceptron = new Perceptron(3);
+    let NUMBER_OF_POINTS = document.getElementById("num_points").value;
     let training_points = range(0, NUMBER_OF_POINTS).map(_ => {
         let x = random(MIN_X, MAX_X);
         let y = random(MIN_Y, MAX_Y);

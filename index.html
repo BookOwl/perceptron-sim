@@ -6,8 +6,11 @@
         <p>Perceptron Sim</p>
         <p>This website demonstrates a perceptron learning the formula of a line given many example points and being told if they are above or below the real line.</p>
         <p>Each circle is filled in if the perceptron thinks it is below the line, otherwise only the outline is drawn.</p>
-        <input type="checkbox" id="training_mode" />
         <label for="training_mode">Fast Training?</label>
+        <input type="checkbox" id="training_mode" />
+        <label for="num_points">Number of training points</label>
+        <input type="number" id="num_points" step="100" value="800" />
+        <p><button onclick="run_sim()">Start Training</button></p>
         <p></p>
     </div>
     <div>
@@ -18,7 +21,4 @@
        I used <a>https://natureofcode.com/book/chapter-10-neural-networks/</a> to learn how a perceptron works.
     </p>
     <script src = "perceptron.js"></script>
-    <script>
-        run_sim();
-    </script>
 </body>
