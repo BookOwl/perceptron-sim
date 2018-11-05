@@ -40,7 +40,12 @@ class TrainingPoint {
     }
 }
 
+let callback_id = 'none'
+
 function run_sim() {
+    if (callback_id !== 'none') {
+        cancelAnimationFrame(callback_id);
+    }
     let training_canvas = document.getElementById("training_vis_canvas");
     let t_ctx = training_canvas.getContext("2d");
     let perceptron_canvas = document.getElementById("perceptron_vis_canvas");
@@ -72,6 +77,7 @@ function run_sim() {
     })
 
     let count = 0;
+
 
     function frame() {
         // Get training mode
@@ -154,7 +160,7 @@ function run_sim() {
         p_ctx.fillText(`Bias: ${perceptron.weights[2].toFixed(3)}`, MIN_X+75, MAX_Y-20);
         p_ctx.restore();
 
-        requestAnimationFrame(frame);
+        callback_id = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    callback_id = requestAnimationFrame(frame);
 }
