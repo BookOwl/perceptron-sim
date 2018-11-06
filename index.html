@@ -12,6 +12,20 @@
         <input type="number" id="num_points" step="100" value="800" />
         <label for="c">Learning Constant</label>
         <input type="number" id="c" step="0.0001" value="0.001" />
+        <div>
+            <input type="radio" id="line_1"
+                   name="fun" value="line_1" checked />
+            <label for="huey">Y = 0.6X - 50</label>
+            <input type="radio" id="line_2"
+                   name="fun" value="line_2" />
+            <label for="huey">Y = X - 20</label>
+            <input type="radio" id="line_3"
+                   name="fun" value="line_3" />
+            <label for="huey">Y = 2X + 50</label>
+            <input type="radio" id="line_4"
+                   name="fun" value="line_4" />
+            <label for="huey">Y = -40</label>
+        </div>
         <p><button onclick="run_sim()">Start Training</button></p>
         <p></p>
     </div>

@@ -8,7 +8,7 @@ clear_ctx = ctx => {
 }
 
 // The line the perceptron is learning to recognize
-line = x => 0.6 * x - 50;
+lines = [x => 0.6 * x - 50, x => x -20, x => 2*x + 30, x => -40];
 
 class Perceptron {
     constructor(num_weights, c) {
@@ -45,6 +45,16 @@ let callback_id = 'none'
 function run_sim() {
     if (callback_id !== 'none') {
         cancelAnimationFrame(callback_id);
+    }
+    var radios = document.getElementsByName('fun');
+
+    var line;
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+            // do whatever you want with the checked radio
+            line = lines[i];
+            break;
+        }
     }
     let training_canvas = document.getElementById("training_vis_canvas");
     let t_ctx = training_canvas.getContext("2d");
