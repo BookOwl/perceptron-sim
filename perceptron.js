@@ -11,8 +11,8 @@ clear_ctx = ctx => {
 line = x => 0.6 * x - 50;
 
 class Perceptron {
-    constructor(num_weights) {
-        this.c = 0.0001;
+    constructor(num_weights, c) {
+        this.c = c;
         this.weights = [...Array(num_weights)].map(Math.random);
         this.weights[this.weights.length-1] = 1; // Set the bias weight to 1
     }
@@ -67,7 +67,7 @@ function run_sim() {
     t_ctx.fillStyle = 'rgb(0, 0, 0)';
     p_ctx.fillStyle = 'rgb(0, 0, 0)';
 
-    let perceptron = new Perceptron(3);
+    let perceptron = new Perceptron(3, document.getElementById("c").value);
     let NUMBER_OF_POINTS = document.getElementById("num_points").value;
     let training_points = range(0, NUMBER_OF_POINTS).map(_ => {
         let x = random(MIN_X, MAX_X);
