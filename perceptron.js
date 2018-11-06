@@ -87,6 +87,7 @@ function run_sim() {
         clear_ctx(p_ctx);
         t_ctx.lineWidth = 4;
         t_ctx.fillStyle = 'rgb(0, 0, 0)';
+        t_ctx.strokeStyle = 'rgb(0,0,0)';
         let left_y = line(MIN_X);
         let right_y = line(MAX_X);
 
@@ -120,7 +121,8 @@ function run_sim() {
         }
 
         // Draw what the perceptron thinks the line is.
-        t_ctx.fillStyle = 'rgb(127, 127, 127)';
+        t_ctx.strokeStyle = 'rgb(127,127,127)';
+        t_ctx.lineWidth = 4;
         let weights = perceptron.weights;
         let x1 = MIN_X;
         let y1 = (-weights[2] - weights[0]*x1)/weights[1];
@@ -142,7 +144,7 @@ function run_sim() {
         p_ctx.lineTo(MIN_X+75, MIN_Y+50);
         p_ctx.stroke();
         p_ctx.beginPath();
-        p_ctx.fillStyle = "rgb(255, 255, 255)";
+        p_ctx.fillStyle = "rgb(127, 127, 127s)";
         p_ctx.moveTo(0,0);
         p_ctx.arc(0, 0, 30, 0, 2*Math.PI);
         p_ctx.fill();
