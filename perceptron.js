@@ -144,7 +144,7 @@ function run_sim() {
         p_ctx.lineTo(MIN_X+75, MIN_Y+50);
         p_ctx.stroke();
         p_ctx.beginPath();
-        p_ctx.fillStyle = "rgb(127, 127, 127s)";
+        p_ctx.fillStyle = "rgb(127, 127, 127)";
         p_ctx.moveTo(0,0);
         p_ctx.arc(0, 0, 30, 0, 2*Math.PI);
         p_ctx.fill();
